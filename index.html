@@ -181,7 +181,11 @@ const NET={APP:'pinyin-groove-pvp-v1',lib:null,ready:null,
 RELAYS:['wss://relay.damus.io','wss://nos.lol','wss://relay.primal.net','wss://relay.snort.social','wss://offchain.pub','wss://nostr.mom','wss://relay.nostr.band','wss://nostr.oxtr.dev'],
 get CFG(){return{appId:this.APP,relayUrls:this.RELAYS,relayRedundancy:6}},
 URLS:['https://cdn.jsdelivr.net/npm/trystero/+esm','https://esm.run/trystero','https://cdn.jsdelivr.net/npm/trystero@0.21/+esm','https://cdn.skypack.dev/trystero','https://esm.sh/trystero','https://esm.sh/trystero@0.22','https://esm.sh/trystero@0.21','https://cdn.jsdelivr.net/npm/trystero@0.20/+esm','https://cdn.jsdelivr.net/npm/trystero/torrent/+esm','https://esm.sh/trystero/torrent'],
-load(){return this.ready||(this.ready=(async()=>{for(const u of this.URLS){try{const m=await import(u);if(m&&m.joinRoom&&m.selfId){this.lib=m;nlog('OK',u);return m}nlog('thiếu joinRoom/selfId',u,Object.keys(m||{}))}catch(e){nlog('không tải được',u,e)}}this.ready=null;throw new Error('no-trystero')})())}};
+lobby:null,err:'',
+load(){return this.ready||(this.ready=(async()=>{for(const u of this.URLS){let m;try{m=await import(u)}catch(e){nlog('không tải được',u,e);this.err=String(e&&e.message||e);continue}
+if(!(m&&m.joinRoom&&m.selfId)){nlog('thiếu joinRoom/selfId',u,Object.keys(m||{}));this.err='thiếu joinRoom/selfId';continue}
+this.lib=m;try{this.lobby=netRoom('lobby');nlog('OK',u);return m}catch(e){nlog('tải được nhưng lỗi khi tạo kết nối',u,e);this.err=String(e&&e.stack||e&&e.message||e).slice(0,300)}}
+this.ready=null;this.lib=null;throw new Error(this.err||'no-trystero')})())}};
 const CODE_RE=/^[a-z0-9]{4,12}$/;
 const MAXMSG=4000;
 function mkHub(selfId,send){const mine={},rem=new Map(),subs=[];let dead=false,st=0,nq=false;
@@ -231,7 +235,7 @@ const pub=p=>{if(G.mode==='duel'&&MM.room)MM.room.presence(p)};
 const nick=()=>$('#nk').value.replace(/[^\p{L}\p{N} _.-]/gu,'').trim().slice(0,12)||'Player';
 const nm12=p=>String(p&&p.presence&&p.presence.nm||'?').slice(0,12),lvTxt=c=>((c&&Array.isArray(c.lv)?c.lv:[]).filter(i=>LV[i]).map(i=>LV[i][0]).join(' → ')||'?')+' · '+(c&&MD[c.md]?MD[c.md][1]:'?')+' BPM';
 async function mmInit(){const b=$('#mkr'),f=$('#fdr'),st=$('#mmst');b.disabled=f.disabled=true;st.textContent='Đang kết nối ghép trận P2P…';
-try{await NET.load();MM.lobby=netRoom('lobby');MM.lobby.join=async c=>{if(!CODE_RE.test(String(c)))throw new Error('code');return netRoom('room-'+c)}}catch(e){st.textContent='Không tải được thư viện P2P từ '+NET.URLS.length+' nguồn CDN (xem Console F12). ';const a=document.createElement('a');a.href='#';a.textContent='Thử lại';a.style.color='var(--cy)';a.onclick=ev=>{ev.preventDefault();mmInit()};st.appendChild(a);return}
+try{await NET.load();MM.lobby=NET.lobby;MM.lobby.join=async c=>{if(!CODE_RE.test(String(c)))throw new Error('code');return netRoom('room-'+c)}}catch(e){st.textContent='Không khởi tạo được kết nối P2P ('+NET.URLS.length+' nguồn đã thử). Lỗi: '+String(NET.err||'?').slice(0,160)+' ';const a=document.createElement('a');a.href='#';a.textContent='Thử lại';a.style.color='var(--cy)';a.onclick=ev=>{ev.preventDefault();mmInit()};st.appendChild(a);return}
 MM.lobby.presence({g:'pg'});MM.lobby.onPeers(lobbyTick);b.disabled=f.disabled=false;lobbyTick()}
 const lobbyPeers=()=>MM.lobby.peers().filter(p=>p.kind==='viewer'&&p.presence.g==='pg'),openRooms=ps=>ps.filter(p=>!p.sameTab&&p.presence.hr&&p.presence.hs==='open'&&CODE_RE.test(String(p.presence.hr)));
 function lobbyTick(){if(!MM.lobby)return;const ps=lobbyPeers();if(G.st==='START')$('#mmst').textContent=(MM.msg?MM.msg+' · ':'')+`Online: ${ps.length} · phòng đang mở: ${openRooms(ps).length}`+(ps.length<2?' · đang dò tìm người chơi khác…':'');if(G.st==='ROOMS')renderRooms(ps)}
