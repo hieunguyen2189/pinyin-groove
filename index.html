@@ -48,7 +48,17 @@ h1{font:900 clamp(38px,11vw,66px)/1 system-ui;text-align:center;letter-spacing:.
 .big{font-size:42px;font-weight:900;font-variant-numeric:tabular-nums}.rw{display:flex;justify-content:space-between;padding:6px 4px;border-bottom:1px solid var(--ln);opacity:0;animation:up .4s forwards}.hs{color:var(--au);font-weight:800}.card button{width:100%;margin-top:6px}
 .ps *{animation-play-state:paused!important}
 #opp{display:none;gap:8px;align-items:center;padding:3px 12px 0;font-size:12px;color:var(--cy)}body.duel #opp{display:flex}#opp b{font-variant-numeric:tabular-nums}.og{flex:1;height:6px;background:var(--ln);border-radius:9px;overflow:hidden}.og i{display:block;height:100%;width:60%;background:var(--cy);transition:width .3s}
-.duel #pause [data-a=restart]{display:none}#nk{flex:1;min-width:0;height:56px;border-radius:10px;border:1px solid var(--ln);background:#05030a;color:#fff;padding:0 12px;font:inherit;font-size:16px}#fm{flex:1;min-width:150px}#fm:disabled{opacity:.4}
+.duel #pause [data-a=restart]{display:none}
+#game{flex-direction:row}#mainc{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+#oppv{display:none;flex:0 0 clamp(124px,34vw,340px);border-left:1px solid var(--ln);background:#09040f;padding:8px 6px;flex-direction:column;gap:6px;align-items:center;text-align:center;overflow:hidden}body.duel #oppv{display:flex}
+#oppv .oh{color:var(--cy);font-weight:800;font-size:13px;letter-spacing:.06em;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#oppv small,#oppv .om span{color:var(--mut);font-size:10px;letter-spacing:.1em}
+#oppv .om b{font-size:clamp(15px,4vw,22px);font-variant-numeric:tabular-nums}#ohz{font:700 clamp(30px,8vw,64px)/1.1 "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;margin-top:6px}#ot{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;min-height:28px}
+#oppv .t{min-width:26px;height:26px;padding:0;font-size:13px;border-radius:7px}.ob{width:90%;height:8px;background:#1b1030;border-radius:9px;overflow:hidden}.ob i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cy),var(--pk))}
+#oj{min-height:24px;font:900 clamp(14px,4vw,22px)/1 system-ui;font-style:italic;opacity:0}#oj.go{animation:jd .8s forwards}#od{font-size:clamp(34px,9vw,56px);margin-top:auto}
+#room{overflow:auto;align-items:center;background:radial-gradient(ellipse at 50% -10%,#5a1470 0,transparent 60%),var(--bg)}#room[hidden],#rl[hidden],#rh[hidden],#jb[hidden]{display:none}#rc{cursor:pointer}[hidden]{display:none!important}#ln[hidden]{display:none}#lno,#lni{width:100%;height:84px;border-radius:10px;border:1px solid var(--ln);background:#05030a;color:#fff;padding:8px;font:12px ui-monospace,Menlo,Consolas,monospace;resize:none}
+.rr{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--ln);border-radius:10px;background:var(--card)}.rr small{display:block;color:var(--mut)}.rr button{background:var(--pk);border:0;font-weight:800;min-width:84px}
+.slot{padding:12px;border:1px solid var(--ln);border-radius:10px;font-weight:800;font-size:18px;background:var(--card)}.slot small{display:block;font-size:11px;color:var(--mut);letter-spacing:.1em;font-weight:400}.slot.me{border-color:var(--cy)}
+#rc{font:900 34px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--au);text-align:center}#nk,#jc{flex:1;min-width:0;height:56px;border-radius:10px;border:1px solid var(--ln);background:#05030a;color:#fff;padding:0 12px;font:inherit;font-size:16px}#fm{flex:1;min-width:150px}#fm:disabled{opacity:.4}
 @keyframes rg{0%{transform:scale(2.5);opacity:0}60%{opacity:.9}100%{transform:scale(1);opacity:1}}@keyframes bop{50%{transform:translateY(-8px) scale(1.07)}}
 @keyframes spin{to{transform:rotate(360deg) scale(1.2)}}@keyframes cue{50%{opacity:.45}}@keyframes sh{25%{transform:translate(-5px,2px)}50%{transform:translate(5px,-2px)}75%{transform:translate(-3px,0)}}
 @keyframes fv{50%{filter:hue-rotate(40deg) saturate(1.5)}}@keyframes pp{50%{scale:1.2}}@keyframes pp2{0%{scale:2;opacity:0}40%{scale:1;opacity:1}100%{scale:.9;opacity:.3}}
@@ -61,18 +71,29 @@ h1{font:900 clamp(38px,11vw,66px)/1 system-ui;text-align:center;letter-spacing:.
 <h1>PINYIN <span>GROOVE</span></h1><p class="sub">Gõ pinyin theo nhịp. Nhấn SPACE đúng beat để ăn PERFECT.</p>
 <h3>CHỌN 1–3 LEVEL · CHƠI LẦN LƯỢT TỪ THẤP LÊN CAO, MỖI CHẶNG 12 VÒNG</h3><div id="lv" class="g2"></div><h3>NHỊP NHẠC</h3><div id="md" class="g3"></div>
 <div class="row"><button class="snd"></button><button class="tg" data-k="hint"></button><button class="tg" data-k="mean"></button></div>
-<button id="go" class="btn">START SOLO</button><h3>ĐẤU 1V1 · GHÉP TRẬN</h3><div class="row"><input id="nk" maxlength="12" placeholder="Biệt danh" aria-label="Biệt danh"><button id="fm" class="btn">⚔ TÌM TRẬN 1V1</button></div><p class="mut" id="mmst"></p><p class="mut" id="bst"></p>
+<button id="go" class="btn">START SOLO</button><h3>ĐẤU 1V1 · PHÒNG</h3><div class="row"><input id="nk" maxlength="12" placeholder="Biệt danh" aria-label="Biệt danh"></div><div class="g2"><button id="mkr" class="btn">➕ TẠO PHÒNG</button><button id="fdr" class="btn" style="background:var(--cy);color:#04141a;box-shadow:none">🔍 TÌM PHÒNG</button></div><button id="lan" style="width:100%;margin-top:8px">🔗 CHƠI LAN / KẾT NỐI TRỰC TIẾP (không cần internet)</button><p class="mut" id="mmst"></p><p class="mut" id="bst"></p>
 <p class="mut">Mỗi vòng có một từ Hán. Gõ lần lượt pinyin từng âm tiết (ni3 / nǐ / ni đều được, ü = v) — ô sáng lên là đúng. Gõ xong, nhấn SPACE (hoặc nút SPACE) đúng lúc vòng tròn thu vào beat. Hết giờ hoặc gõ sai nhiều sẽ tụt Groove. Esc = tạm dừng.</p></div></div>
-<div id="game" class="scr">
+<div id="game" class="scr"><div id="mainc">
 <div id="top"><div><span>SCORE</span><b id="sc">0</b></div><b id="cb">x0</b><div class="r"><span id="stg">STAGE 1</span></div></div>
-<div id="gg"><div id="gb"></div></div><div id="opp"><span id="on"></span><b id="os">0</b><span id="oc">x0</span><div class="og"><i id="og"></i></div><span id="or"></span></div>
+<div id="gg"><div id="gb"></div></div>
 <div id="stage"><canvas id="cv"></canvas><div id="floor"></div>
 <div id="word"><b id="hz"></b><i id="mn"></i></div><div id="tiles"></div><div id="tbw"><div id="tb"></div></div>
 <div id="jd"></div><div id="bn"></div><div id="cue">SPACE!</div><div id="ringw"><i></i><div id="dn">🕺</div></div></div>
-<div id="dock"><input id="in" type="text" placeholder="Type Pinyin..." autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Pinyin"><button id="sp">SPACE</button><button id="pz" class="ib" aria-label="Pause">⏸</button><button class="snd ib" aria-label="Sound"></button></div>
+<div id="dock"><input id="in" type="text" placeholder="Type Pinyin..." autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" aria-label="Pinyin"><button id="sp">SPACE</button><button id="pz" class="ib" aria-label="Pause">⏸</button><button class="snd ib" aria-label="Sound"></button></div></div>
+<div id="oppv"><div class="oh"><small>ĐỐI THỦ</small><div id="on"></div></div><div class="om"><span>SCORE</span><br><b id="os">0</b></div><div class="om"><span>COMBO</span> <b id="oc">x0</b></div><div class="ob"><i id="og" style="width:60%"></i></div><b id="ohz"></b><div id="ot"></div><div class="ob"><i id="otb"></i></div><div id="oj"></div><small id="or"></small><div id="od">🕺</div></div>
 <div id="count" class="ov"><div id="num"></div></div>
 <div id="pause" class="ov"><h2>PAUSED</h2><button class="btn" data-a="resume">RESUME</button><button data-a="restart">RESTART</button><button data-a="quit">QUIT</button></div>
 <div id="ov" class="ov"><h2 style="color:var(--pk)">SHOW OVER</h2></div><div id="wt" class="ov"><h2>CHỜ ĐỐI THỦ…</h2><p class="mut">Bạn đã xong, đang đợi đối thủ hoàn thành.</p><button data-a="quit">THOÁT TRẬN</button></div></div>
+<div id="room" class="scr"><div class="wrap"><h2 id="rt" style="text-align:center;letter-spacing:.12em"></h2>
+<div id="ln" class="wrap" hidden style="padding:0;gap:8px"><p class="mut">Hai máy chung Wi-Fi/LAN trao đổi 2 mã bằng copy–dán (Zalo, Messenger, ...). Không cần relay hay internet.</p>
+<div class="g2"><button id="lnh" class="btn">TÔI LÀ HOST</button><button id="lnj" class="btn" style="background:var(--cy);color:#04141a;box-shadow:none">TÔI VÀO PHÒNG</button></div>
+<p class="mut" id="lnm"></p><textarea id="lno" readonly hidden aria-label="Mã của bạn"></textarea><button id="lnc" hidden>COPY MÃ</button><textarea id="lni" hidden placeholder="Dán mã vào đây" aria-label="Mã nhận được" autocapitalize="none" spellcheck="false"></textarea><button id="lna" class="btn" hidden></button></div>
+<div id="jb" class="row" hidden style="gap:8px"><input id="jc" maxlength="12" placeholder="Nhập mã phòng (vd: r8k2xq)" autocapitalize="none" autocomplete="off" spellcheck="false" aria-label="Mã phòng"><button id="jgo" class="btn">VÀO</button></div>
+<div id="rl" class="wrap" style="padding:0;gap:8px"></div>
+<div id="rh" class="wrap" style="padding:0;gap:10px"><div class="mut" style="text-align:center">MÃ PHÒNG</div><div id="rc"></div>
+<div class="slot me"><small>HOST</small><span id="s1"></span></div><div class="slot"><small>NGƯỜI CHƠI</small><span id="s2"></span></div>
+<p class="mut" id="rs2"></p><p class="mut" id="rwt"></p><button id="rgo" class="btn">BẮT ĐẦU TRẬN</button></div>
+<button id="rb">← THOÁT / QUAY LẠI</button></div></div>
 <div id="result" class="scr"></div>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -95,8 +116,8 @@ const cv=$('#cv'),cx=cv.getContext('2d'),inp=$('#in'),game=$('#game');
 const later=(f,ms)=>G.timers.push(setTimeout(f,ms)),clearT=()=>{G.timers.forEach(clearTimeout);G.timers=[]},retrig=(e,c)=>{e.classList.remove(c);void e.offsetWidth;e.classList.add(c)};
 const GR={P:['PERFECT!',300,8],C:['COOL!',200,5],G:['GOOD',100,2],B:['BAD',0,-8]};
 function resize(){const s=$('#stage'),w=s.clientWidth;if(!w)return;W=cv.width=w;H=cv.height=s.clientHeight}
-function show(id){['start','game','result'].forEach(s=>$('#'+s).classList.toggle('on',s===id))}
-function reset(){clearT();Object.assign(G,{score:0,combo:0,max:0,gauge:60,round:0,stage:1,lastStage:0,lvl:-1,ending:0,ko:false,used:new Set(),cnt:{P:0,C:0,G:0,B:0,M:0},err:0,nb:0,last:0});cur=null;P.length=0}
+function show(id){['start','game','result','room'].forEach(s=>$('#'+s).classList.toggle('on',s===id))}
+function reset(){clearT();Object.assign(G,{score:0,combo:0,max:0,gauge:60,round:0,stage:1,lastStage:0,lvl:-1,ending:0,ko:false,jn:0,ojn:0,lp:0,used:new Set(),cnt:{P:0,C:0,G:0,B:0,M:0},err:0,nb:0,last:0});cur=null;P.length=0}
 function startGame(){reset();Au.init();const D=G.mode==='duel';G.chain=D?G.cfg.lv:chain();G.md=D?G.cfg.md:Store.d.md;G.rng=D?mb(G.cfg.seed):Math.random;G.total=D?12*G.chain.length:Infinity;document.body.classList.toggle('duel',D);$('#pause h2').textContent=D?'MENU (trận vẫn chạy)':'PAUSED';if(D)oppUI();G.bd=60000/MD[G.md][1];game.style.setProperty('--bd',G.bd+'ms');show('game');$$('.ov').forEach(o=>o.classList.remove('on'));document.body.classList.remove('ps','fever');resize();
 inp.value='';inp.focus();G.st='COUNT';hud();$('#hz').textContent='';$('#mn').textContent='';$('#tiles').innerHTML='';$('#tb').style.width='100%';$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');
 game.classList.remove('beat');void game.offsetWidth;game.classList.add('beat');cancelAnimationFrame(G.raf);G.raf=requestAnimationFrame(t=>{G.t0=t;G.nb=0;Au.start();loop(t);count()})}
@@ -106,26 +127,26 @@ function pause(){if(G.mode==='duel'){if(G.st==='PLAY'||G.st==='COUNT')$('#pause'
 function pick(){const pool=Vocab.data[LV[G.lvl][0]],mx=G.stage<2?2:G.stage<3?3:4,mn=G.stage>1?2:1,ok=w=>w.tiles.length>=mn&&w.tiles.length<=mx;let c=pool.filter(w=>ok(w)&&!G.used.has(w));if(!c.length){G.used.clear();c=pool.filter(ok);if(!c.length)c=pool;banner('NEW SET')}const w=c[G.rng()*c.length|0];G.used.add(w);return w}
 function nextRound(){if(G.st!=='PLAY')return;const ch=Math.min(G.chain.length-1,G.round/12|0),nl=G.chain[ch];if(nl!==G.lvl){const f=G.lvl<0;G.lvl=nl;G.used.clear();if(!f){banner(LV[nl][0]+' · CHẶNG '+(ch+1));gauge(10)}}G.stage=1+(G.round++/6|0);if(G.stage!==G.lastStage){G.lastStage=G.stage;if(G.stage>1)banner('STAGE '+G.stage)}
 const w=pick(),n=w.tiles.length,limit=(4.5+2*n)*(110/MD[G.md][1])*Math.max(.6,1-.04*(G.stage-1));cur={w,i:0,limit,left:limit,act:true,rd:false,rev:false};
-$('#dn').classList.remove('sp');$('#hz').textContent=w.hanzi;$('#mn').textContent=w.meaning;inp.value='';inp.classList.remove('bad');$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');paint();hud();inp.focus()}
+$('#dn').classList.remove('sp');$('#hz').textContent=w.hanzi;$('#mn').textContent=w.meaning;inp.value='';inp.classList.remove('bad');$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');paint();hud();pub({hz:w.hanzi,ti:0,tn:n,tl:100});inp.focus()}
 function paint(fail){$('#tiles').innerHTML=cur.w.tiles.map((t,i)=>{const dn=i<cur.i,c=dn?'ok':fail?'bd':i===cur.i&&cur.act&&!cur.rd?'on':'';return`<b class="t ${c}">${dn||fail||Store.d.hint||(cur.rev&&i===cur.i)?t:'?'}</b>`}).join('')}
 function onInput(){if(G.st!=='PLAY'||!cur||!cur.act){inp.value='';return}if(cur.rd){inp.value='';return}let b=key(inp.value),adv=0;const k=cur.w.keys;while(cur.i<k.length&&b.startsWith(k[cur.i])){b=b.slice(k[cur.i].length);cur.i++;adv++;Au.sfx(520+cur.i*90,.1)}
-if(adv){inp.value=b;paint()}if(cur.i>=k.length){cur.rd=true;inp.value='';inp.classList.remove('bad');$('#ringw').classList.add('rd');$('#cue').classList.add('on');$('#sp').classList.add('rd');paint();return}
+if(adv){inp.value=b;paint();pub({ti:cur.i})}if(cur.i>=k.length){cur.rd=true;inp.value='';inp.classList.remove('bad');$('#ringw').classList.add('rd');$('#cue').classList.add('on');$('#sp').classList.add('rd');paint();return}
 inp.classList.toggle('bad',!!b&&!k.slice(cur.i).join('').startsWith(b))}
 function wrong(){if(!cur||!cur.act||cur.rd||!inp.value.trim())return;G.err++;G.combo=0;cur.rev=true;gauge(-4);inp.value='';inp.classList.remove('bad');retrig(inp,'er');Au.sfx(150,.25,'sawtooth',.08,60);paint();hud()}
 function spaceHit(){if(G.st!=='PLAY'||!cur||!cur.act)return;if(!cur.rd){banner('GÕ XONG PINYIN TRƯỚC');return}
 const now=performance.now(),nb=Math.round((now-G.t0)/G.bd),d=Math.abs(now-(G.t0+nb*G.bd));let g=d<75?'P':d<135?'C':d<220?'G':'B';if(cur.rev&&(g==='P'||g==='C'))g='G';
-cur.act=false;const n=cur.w.tiles.length;G.cnt[g]++;if(g==='B')G.combo=0;else{G.combo++;G.max=Math.max(G.max,G.combo)}
+cur.act=false;const n=cur.w.tiles.length;G.cnt[g]++;pub({j:g,jn:++G.jn,ti:n});if(g==='B')G.combo=0;else{G.combo++;G.max=Math.max(G.max,G.combo)}
 let p=60*n+Math.round(100*cur.left/cur.limit)+GR[g][1]+G.combo*20;if(G.combo>=10)p*=2;G.score+=p;gauge(GR[g][2]);judge(g,'+'+p);burst(g);Au.sfx(g==='P'?1320:g==='C'?990:g==='G'?760:200,.2,g==='B'?'sawtooth':'square',.05);
 const c=G.combo;if(c===10)banner('FEVER x2!');else if(c>0&&c%5===0)banner('COMBO x'+c);document.body.classList.toggle('fever',G.combo>=10);
 const dn=$('#dn');dn.textContent=g==='B'?'😅':['🕺','💃','🤸','🧑‍🎤'][Math.random()*4|0];if(g==='P'||g==='C')retrig(dn,'sp');$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');hud();later(after,650)}
-function fail(){cur.act=false;cur.rd=false;G.cnt.M++;G.combo=0;gauge(-18);cur.i=0;paint(true);judge('M','');Au.sfx(120,.4,'sawtooth',.09,50);shake();document.body.classList.remove('fever');$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');hud();later(after,1100)}
+function fail(){cur.act=false;cur.rd=false;G.cnt.M++;pub({j:'M',jn:++G.jn});G.combo=0;gauge(-18);cur.i=0;paint(true);judge('M','');Au.sfx(120,.4,'sawtooth',.09,50);shake();document.body.classList.remove('fever');$('#ringw').classList.remove('rd');$('#cue').classList.remove('on');$('#sp').classList.remove('rd');hud();later(after,1100)}
 const after=()=>{if(G.st==='PAUSED'){later(after,300);return}if(G.mode==='duel'&&G.gauge>0&&G.round>=G.total){finishDuel(false);return}G.gauge<=0?over():nextRound()},gauge=v=>{G.gauge=Math.max(0,Math.min(100,G.gauge+v))};
 function judge(g,t){const e=$('#jd');e.className='j'+g;e.textContent=(g==='M'?'MISS':GR[g][0])+(t?' '+t:'');retrig(e,'go')}
 function banner(t){const b=$('#bn');b.textContent=t;retrig(b,'go')}
 function shake(){retrig(game,'sh')}
 function hud(){$('#sc').textContent=G.score.toLocaleString('en-US');$('#cb').textContent='x'+G.combo;$('#gb').style.width=G.gauge+'%';$('#stg').textContent=(G.lvl>=0?LV[G.lvl][0]+' · ':'')+'STAGE '+G.stage;if(G.mode==='duel'&&MM.room)MM.room.presence({sc:G.score,cb:G.combo,gg:G.gauge,r:G.round})}
 function over(){if(G.st==='OVER')return;G.st='OVER';Au.stop();Au.sfx(300,.8,'sawtooth',.08,60);document.body.classList.remove('fever');$('#ov').classList.add('on');later(()=>{$('#ov').classList.remove('on');G.mode==='duel'?finishDuel(true):result()},1400)}
-function loop(t){G.raf=requestAnimationFrame(loop);const dt=Math.min(.05,(t-(G.last||t))/1000);G.last=t;if(G.st==='PLAY'&&cur&&cur.act){cur.left-=dt;const r=Math.max(0,cur.left/cur.limit);$('#tb').style.width=r*100+'%';$('#tb').classList.toggle('lo',r<.25);if(cur.left<=0)fail()}
+function loop(t){G.raf=requestAnimationFrame(loop);const dt=Math.min(.05,(t-(G.last||t))/1000);G.last=t;if(G.st==='PLAY'&&cur&&cur.act){cur.left-=dt;const r=Math.max(0,cur.left/cur.limit);$('#tb').style.width=r*100+'%';$('#tb').classList.toggle('lo',r<.25);if(G.mode==='duel'&&t-G.lp>250){G.lp=t;pub({tl:Math.round(r*100)})}if(cur.left<=0)fail()}
 cx.clearRect(0,0,W,H);for(let i=P.length-1;i>=0;i--){const p=P[i];p.l-=dt;if(p.l<=0){P.splice(i,1);continue}p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=380*dt;cx.globalAlpha=Math.min(1,p.l*2);cx.fillStyle=p.c;cx.fillRect(p.x,p.y,4,4)}cx.globalAlpha=1}
 function burst(g){const n=g==='P'?60:g==='C'?36:g==='G'?20:8,cs=g==='P'?['#ffd23f','#ff2fa8','#22e5ff']:['#22e5ff','#ff2fa8'],x=W/2,y=H-clamp(70);for(let i=0;i<n&&P.length<400;i++){const a=Math.random()*6.28,s=80+Math.random()*320;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-160,l:.6+Math.random()*.7,c:cs[i%cs.length]})}}
 const clamp=v=>Math.min(v,H*.3);
@@ -143,44 +164,103 @@ $$('.tg').forEach(b=>b.textContent=(b.dataset.k==='hint'?'HINT PINYIN: ':'MEANIN
 inp.addEventListener('input',onInput);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')pause();else if(G.st==='START'&&e.key==='Enter'&&e.target.id!=='nk'){G.mode='solo';startGame()}else if(G.st==='PLAY'){if(e.code==='Space'&&cur&&cur.rd){e.preventDefault();spaceHit()}else if(e.key==='Enter'){e.preventDefault();cur&&cur.rd?spaceHit():wrong()}}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&G.st==='PLAY')pause()});
-$('#sp').onclick=()=>{spaceHit();inp.focus()};$('#pz').onclick=pause;$('#go').onclick=()=>{if(MM.on)mmStop();G.mode='solo';startGame()};
+$('#sp').onclick=()=>{spaceHit();inp.focus()};$('#pz').onclick=pause;$('#go').onclick=()=>{G.mode='solo';startGame()};
 $('#lv').onclick=e=>{const b=e.target.closest('button');if(b){const i=+b.dataset.i;let a=Store.d.lvs.slice();if(a.includes(i)){if(a.length>1)a=a.filter(x=>x!==i)}else{a.push(i);if(a.length>3)a.shift()}Store.d.lvs=a;Store.save();renderStart()}};
 $('#md').onclick=e=>{const b=e.target.closest('button');if(b){Store.d.md=+b.dataset.m;Store.save();renderStart()}};
 document.addEventListener('click',e=>{const s=e.target.closest('.snd'),t=e.target.closest('.tg'),a=e.target.closest('[data-a]');
 if(s){Store.d.sound=Store.d.sound?0:1;Store.save();sync();if(G.st==='PLAY')Store.d.sound?Au.start():Au.stop()}else if(t){Store.d[t.dataset.k]=Store.d[t.dataset.k]?0:1;Store.save();sync();if(cur&&G.st==='PLAY')paint()}
-else if(a){const v=a.dataset.a;if(v==='resume')pause();else if(v==='restart')startGame();else if(v==='quit')toStart();else if(v==='again'){toStart();mmFind()}}});
+else if(a){const v=a.dataset.a;if(v==='resume')pause();else if(v==='restart')startGame();else if(v==='quit')toStart();else if(v==='rematch')backToRoom()}});
 if(window.ResizeObserver)new ResizeObserver(resize).observe($('#stage'));else window.addEventListener('resize',resize);
 const vv=window.visualViewport;function fit(){document.documentElement.style.height=(vv?vv.height:innerHeight)+'px';window.scrollTo(0,0)}
 if(vv){vv.addEventListener('resize',fit);vv.addEventListener('scroll',()=>window.scrollTo(0,0));fit()}
-/* ===== Chain level + 1v1 (ghép trận qua capability room: chỉ dùng presence) ===== */
+/* ===== Net: P2P WebRTC (Trystero) - thay cho claude.use('room'); không cần server riêng, chạy được trên GitHub Pages =====
+   API giữ nguyên kiểu room: presence(obj) gộp state, onPeers(cb), peers(), leave(), lobby.join(code).
+   Signaling dùng relay công cộng (Nostr) của Trystero; sau khi bắt tay xong dữ liệu đi trực tiếp giữa 2 trình duyệt. */
+const nlog=(...a)=>{try{(console.log||console.warn).call(console,'[net]',...a)}catch(e){}};
+const NET={APP:'pinyin-groove-pvp-v1',lib:null,ready:null,
+RELAYS:['wss://relay.damus.io','wss://nos.lol','wss://relay.primal.net','wss://relay.snort.social','wss://offchain.pub','wss://nostr.mom','wss://relay.nostr.band','wss://nostr.oxtr.dev'],
+get CFG(){return{appId:this.APP,relayUrls:this.RELAYS,relayRedundancy:6}},
+URLS:['https://cdn.jsdelivr.net/npm/trystero/+esm','https://esm.run/trystero','https://cdn.jsdelivr.net/npm/trystero@0.21/+esm','https://cdn.skypack.dev/trystero','https://esm.sh/trystero','https://esm.sh/trystero@0.22','https://esm.sh/trystero@0.21','https://cdn.jsdelivr.net/npm/trystero@0.20/+esm','https://cdn.jsdelivr.net/npm/trystero/torrent/+esm','https://esm.sh/trystero/torrent'],
+load(){return this.ready||(this.ready=(async()=>{for(const u of this.URLS){try{const m=await import(u);if(m&&m.joinRoom&&m.selfId){this.lib=m;nlog('OK',u);return m}nlog('thiếu joinRoom/selfId',u,Object.keys(m||{}))}catch(e){nlog('không tải được',u,e)}}this.ready=null;throw new Error('no-trystero')})())}};
+const CODE_RE=/^[a-z0-9]{4,12}$/;
+const MAXMSG=4000;
+function mkHub(selfId,send){const mine={},rem=new Map(),subs=[];let dead=false,st=0,nq=false;
+const notify=()=>{if(nq||dead)return;nq=true;queueMicrotask(()=>{nq=false;if(dead)return;subs.slice().forEach(f=>{try{f()}catch(e){nlog('cb',e)}})})};
+const push=to=>{if(dead||!Object.keys(mine).length)return;try{send(mine,to)}catch(e){}};
+const sched=()=>{if(!st)st=setTimeout(()=>{st=0;push()},50)};
+const clean=d=>{if(!d||typeof d!=='object'||Array.isArray(d))return null;let j;try{j=JSON.stringify(d)}catch(e){return null}if(j.length>MAXMSG)return null;const o={};for(const k of Object.keys(d))if(k!=='__proto__'&&k.length<=8)o[k]=d[k];return o};
+const hb=setInterval(()=>push(),5000);
+const r={presence(p){let ch=false;for(const k of Object.keys(p||{})){if(k==='__proto__')continue;if(JSON.stringify(mine[k])!==JSON.stringify(p[k])){mine[k]=p[k];ch=true}}if(ch){sched();notify()}},
+onPeers(cb){subs.push(cb)},
+peers(){return[{peer:selfId,kind:'viewer',sameTab:true,presence:{...mine}},...[...rem].map(([peer,presence])=>({peer,kind:'viewer',sameTab:false,presence}))]},
+leave(){}};
+return{r,recv(d,id){const o=clean(d);if(!o)return;rem.set(id,o);notify()},join:push,drop(id){if(rem.delete(id))notify()},kill(){dead=true;clearInterval(hb);clearTimeout(st);subs.length=0;rem.clear()}}}
+function netRoom(name){const L=NET.lib,tr=L.joinRoom(NET.CFG,name),[sendP,onP]=tr.makeAction('pres');
+const h=mkHub(L.selfId,(d,to)=>{const x=sendP(d,to);if(x&&x.catch)x.catch(()=>{})});
+onP((d,id)=>h.recv(d,id));tr.onPeerJoin(id=>h.join(id));tr.onPeerLeave(id=>h.drop(id));
+h.r.leave=()=>{h.kill();try{tr.leave()}catch(e){}};return h.r}
+/* ===== LAN / trực tiếp: WebRTC thủ công (trao đổi offer/answer bằng copy-dán), không cần relay ===== */
+const enc=d=>'PG1:'+btoa(unescape(encodeURIComponent(JSON.stringify({type:d.type,sdp:d.sdp})))),dec=t=>{try{t=String(t).trim().replace(/\s+/g,'');if(!t.startsWith('PG1:'))return null;const d=JSON.parse(decodeURIComponent(escape(atob(t.slice(4)))));return d&&(d.type==='offer'||d.type==='answer')&&typeof d.sdp==='string'?d:null}catch(e){return null}};
+const gather=pc=>new Promise(res=>{if(pc.iceGatheringState==='complete')return res();const f=()=>{if(pc.iceGatheringState==='complete'){pc.removeEventListener('icegatheringstatechange',f);res()}};pc.addEventListener('icegatheringstatechange',f);setTimeout(res,3500)});
+const LAN={pc:null,dc:null,role:null,
+reset(){try{this.dc&&this.dc.close()}catch(e){}try{this.pc&&this.pc.close()}catch(e){}this.pc=this.dc=this.role=null},
+mk(){this.reset();const pc=this.pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});return pc},
+wire(dc){this.dc=dc;const go=()=>{const id=Math.random().toString(36).slice(2,10);let rid=null;const hub=mkHub(id,d=>{if(dc.readyState==='open')dc.send(JSON.stringify({t:'p',d}))});
+dc.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}if(!m||typeof m!=='object')return;if(m.t==='hi'&&typeof m.id==='string'&&!rid){rid=m.id.slice(0,16);hub.join(rid)}else if(m.t==='p'&&rid)hub.recv(m.d,rid)};
+dc.onclose=()=>{if(rid)hub.drop(rid)};hub.r.leave=()=>{hub.kill();try{dc.close()}catch(e){}};
+dc.send(JSON.stringify({t:'hi',id}));this.ready(hub.r)};dc.readyState==='open'?go():dc.onopen=go},
+ready(room){if(MM.room){try{room.leave()}catch(e){}return}if(this.role==='h')createRoom(room);else joinRoom(null,room)}};
+const lanMsg=t=>{$('#lnm').textContent=t};
+function openLan(){Au.init();G.st='LAN';show('room');['#jb','#rl','#rh'].forEach(q=>$(q).hidden=true);$('#ln').hidden=false;['#lno','#lnc','#lni','#lna'].forEach(q=>$(q).hidden=true);$('#rt').textContent='CHƠI LAN / TRỰC TIẾP';
+if(typeof RTCPeerConnection==='undefined'){lanMsg('Trình duyệt không hỗ trợ WebRTC.');$('#lnh').disabled=$('#lnj').disabled=true;return}$('#lnh').disabled=$('#lnj').disabled=false;lanMsg('Chọn vai trò. Một người là HOST (tạo mã trước), người còn lại bấm TÔI VÀO PHÒNG.')}
+async function lanStart(role){const pc=LAN.mk();LAN.role=role;['#lno','#lnc','#lni','#lna'].forEach(q=>$(q).hidden=true);$('#lno').value=$('#lni').value='';
+pc.onconnectionstatechange=()=>{if(pc.connectionState==='failed'&&!MM.room)lanMsg('Kết nối thất bại. Kiểm tra hai máy cùng mạng/không bị tường lửa chặn rồi thử lại từ đầu.')};
+if(role==='h'){lanMsg('Đang tạo mã…');LAN.wire(pc.createDataChannel('pg'));try{await pc.setLocalDescription(await pc.createOffer());await gather(pc)}catch(e){lanMsg('Không tạo được mã, thử lại.');return}
+$('#lno').value=enc(pc.localDescription);$('#lno').hidden=$('#lnc').hidden=$('#lni').hidden=$('#lna').hidden=false;$('#lna').textContent='KẾT NỐI';
+lanMsg('Bước 1: COPY MÃ rồi gửi cho người chơi kia. Bước 2: dán MÃ TRẢ LỜI của họ vào ô dưới và bấm KẾT NỐI.')}
+else{pc.ondatachannel=e=>LAN.wire(e.channel);$('#lni').hidden=$('#lna').hidden=false;$('#lna').textContent='TẠO MÃ TRẢ LỜI';lanMsg('Dán MÃ của host vào ô dưới rồi bấm TẠO MÃ TRẢ LỜI.')}}
+async function lanAction(){const pc=LAN.pc;if(!pc)return;const d=dec($('#lni').value);
+if(LAN.role==='h'){if(!d||d.type!=='answer'){lanMsg('Mã trả lời không hợp lệ. Hãy dán đủ mã (bắt đầu bằng PG1:).');return}try{await pc.setRemoteDescription(d);$('#lna').hidden=true;lanMsg('Đang kết nối…')}catch(e){lanMsg('Mã không khớp, hãy bắt đầu lại.')}}
+else{if(!d||d.type!=='offer'){lanMsg('Mã của host không hợp lệ. Hãy dán đủ mã (bắt đầu bằng PG1:).');return}lanMsg('Đang tạo mã trả lời…');try{await pc.setRemoteDescription(d);await pc.setLocalDescription(await pc.createAnswer());await gather(pc)}catch(e){lanMsg('Không tạo được mã trả lời, bắt đầu lại.');return}
+$('#lno').value=enc(pc.localDescription);$('#lno').hidden=$('#lnc').hidden=false;$('#lni').hidden=$('#lna').hidden=true;lanMsg('Gửi MÃ TRẢ LỜI này cho host và đợi host bấm KẾT NỐI…')}}
+/* ===== Chain level + 1v1: host tạo phòng / người chơi tìm phòng rồi JOIN ===== */
 if(!Array.isArray(Store.d.lvs)||!Store.d.lvs.length)Store.d.lvs=[0];
 const chain=()=>[...Store.d.lvs].sort((a,b)=>a-b),mb=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
-const MM={lobby:null,room:null,on:false,want:null,opp:null,oppPeer:null,host:false,started:false,oppLeft:false,joining:false};let mq=0;
+const MM={lobby:null,room:null,role:null,code:null,gp:null,cfg:null,opp:null,started:false,oppLeft:false,lastGo:0,seenHost:false,msg:'',list:[],direct:false};let mq=0;
+const pub=p=>{if(G.mode==='duel'&&MM.room)MM.room.presence(p)};
 const nick=()=>$('#nk').value.replace(/[^\p{L}\p{N} _.-]/gu,'').trim().slice(0,12)||'Player';
-async function mmInit(){try{if(typeof claude!=='undefined')MM.lobby=await claude.use('room')}catch(e){}
-if(!MM.lobby){$('#fm').disabled=true;$('#mmst').textContent='1v1 cần mở trang trong claude.ai (đã đăng nhập) và được chia sẻ cho cả hai người chơi.';return}
-MM.lobby.presence({g:'pg'});MM.lobby.onPeers(mmTick,()=>{$('#fm').disabled=true});mmTick()}
-function mmTick(){if(!MM.lobby||MM.room)return;const ps=MM.lobby.peers().filter(p=>p.kind==='viewer'&&p.presence.g==='pg');
-if(!MM.on){$('#mmst').textContent=`Đang online: ${ps.length}. Nhập biệt danh rồi bấm TÌM TRẬN (chỉ ghép được với người cũng đang mở trang này).`;return}
-const q=ps.filter(p=>p.presence.q===1).sort((a,b)=>(a.presence.ts-b.presence.ts)||(a.peer<b.peer?-1:1)),me=q.find(p=>p.sameTab);if(!me)return;
-const i=q.indexOf(me),pt=q[i%2?i-1:i+1];
-if(!pt){$('#mmst').textContent=`Đang tìm đối thủ… (online: ${ps.length})`;if(MM.want){MM.want=null;MM.lobby.presence({mt:null})}return}
-if(MM.want!==pt.peer){MM.want=pt.peer;MM.lobby.presence({mt:pt.peer})}
-$('#mmst').textContent='Đã thấy đối thủ, đang vào phòng…';if(pt.presence.mt===me.peer)enterMatch(me.peer,pt.peer)}
-function mmFind(){if(!MM.lobby)return;if(MM.on){mmStop();return}Au.init();Store.d.nk=nick();Store.save();MM.on=true;MM.want=null;MM.lobby.presence({g:'pg',nm:nick(),q:1,ts:Date.now(),mt:null});$('#fm').textContent='✖ HUỶ TÌM';mmTick()}
-function mmStop(){MM.on=false;MM.want=null;if(MM.lobby)MM.lobby.presence({q:null,mt:null});$('#fm').textContent='⚔ TÌM TRẬN 1V1';mmTick()}
-function mmFail(m){leaveRoom();mmStop();$('#mmst').textContent=m}
-function leaveRoom(){clearTimeout(mq);if(MM.room){try{MM.room.leave()}catch(e){}}Object.assign(MM,{room:null,opp:null,joining:false,started:false,oppLeft:false});G.mode='solo';document.body.classList.remove('duel');$('#pause h2').textContent='PAUSED'}
-async function enterMatch(me,op){if(MM.joining)return;MM.joining=true;const nm='m-'+[me,op].sort().map(x=>String(x).toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,16)).join('-');
-try{MM.room=await MM.lobby.join(nm)}catch(e){MM.joining=false;mmFail('Không vào được phòng, hãy thử lại.');return}
-MM.on=false;MM.oppPeer=op;MM.host=me<op;MM.started=false;MM.oppLeft=false;
-MM.room.onPeers(mrTick);MM.room.presence({g:'pg',nm:nick(),rd:1,cfg:MM.host?{lv:chain(),md:Store.d.md,seed:Date.now()%1000000000}:null,fin:0,ko:0,sc:0,r:0,cb:0,gg:60});
-setTimeout(()=>{if(MM.lobby)MM.lobby.presence({q:null,mt:null})},1500);mq=setTimeout(()=>{if(!MM.started)mmFail('Đối thủ không vào được phòng.')},15000)}
-function mrTick(ch){if(!MM.room)return;const ps=MM.room.peers(),opp=ps.find(p=>p.peer===MM.oppPeer);MM.opp=opp||null;
-if(!MM.started){const host=MM.host?ps.find(p=>p.sameTab):opp;if(opp&&opp.presence.rd===1&&host&&host.presence.cfg){MM.started=true;clearTimeout(mq);beginDuel(host.presence.cfg)}return}
-if(ch&&ch.left.some(p=>p.peer===MM.oppPeer))MM.oppLeft=true;oppUI();checkDuel()}
-function beginDuel(c){const lv=(Array.isArray(c.lv)?c.lv:[0]).map(Number).filter(x=>x>=0&&x<6).slice(0,3).sort((a,b)=>a-b);G.cfg={lv:lv.length?lv:[0],md:MD[c.md]?+c.md:1,seed:+c.seed||1};G.mode='duel';$('#nk').blur();startGame();banner('VS '+String(MM.opp.presence.nm||'?').slice(0,12))}
-function oppUI(){const o=MM.opp&&MM.opp.presence;if(!o)return;$('#on').textContent=String(o.nm||'Đối thủ').slice(0,12);$('#os').textContent=(+o.sc||0).toLocaleString('en-US');$('#oc').textContent='x'+(+o.cb||0);$('#og').style.width=Math.max(0,Math.min(100,+o.gg||0))+'%';$('#or').textContent=(+o.r||0)+'/'+G.total}
+const nm12=p=>String(p&&p.presence&&p.presence.nm||'?').slice(0,12),lvTxt=c=>((c&&Array.isArray(c.lv)?c.lv:[]).filter(i=>LV[i]).map(i=>LV[i][0]).join(' → ')||'?')+' · '+(c&&MD[c.md]?MD[c.md][1]:'?')+' BPM';
+async function mmInit(){const b=$('#mkr'),f=$('#fdr'),st=$('#mmst');b.disabled=f.disabled=true;st.textContent='Đang kết nối ghép trận P2P…';
+try{await NET.load();MM.lobby=netRoom('lobby');MM.lobby.join=async c=>{if(!CODE_RE.test(String(c)))throw new Error('code');return netRoom('room-'+c)}}catch(e){st.textContent='Không tải được thư viện P2P từ '+NET.URLS.length+' nguồn CDN (xem Console F12). ';const a=document.createElement('a');a.href='#';a.textContent='Thử lại';a.style.color='var(--cy)';a.onclick=ev=>{ev.preventDefault();mmInit()};st.appendChild(a);return}
+MM.lobby.presence({g:'pg'});MM.lobby.onPeers(lobbyTick);b.disabled=f.disabled=false;lobbyTick()}
+const lobbyPeers=()=>MM.lobby.peers().filter(p=>p.kind==='viewer'&&p.presence.g==='pg'),openRooms=ps=>ps.filter(p=>!p.sameTab&&p.presence.hr&&p.presence.hs==='open'&&CODE_RE.test(String(p.presence.hr)));
+function lobbyTick(){if(!MM.lobby)return;const ps=lobbyPeers();if(G.st==='START')$('#mmst').textContent=(MM.msg?MM.msg+' · ':'')+`Online: ${ps.length} · phòng đang mở: ${openRooms(ps).length}`+(ps.length<2?' · đang dò tìm người chơi khác…':'');if(G.st==='ROOMS')renderRooms(ps)}
+function openBrowse(){if(!MM.lobby)return;Au.init();G.st='ROOMS';show('room');$('#ln').hidden=true;$('#jb').hidden=false;$('#rl').hidden=false;$('#rh').hidden=true;$('#rt').textContent='TÌM PHÒNG';renderRooms(lobbyPeers())}
+function renderRooms(ps){const rs=openRooms(ps),box=$('#rl');box.textContent='';MM.list=rs;if(!rs.length){const m=document.createElement('p');m.className='mut';m.textContent='Chưa có phòng nào đang mở. Nhờ bạn bè bấm TẠO PHÒNG (danh sách tự cập nhật).';box.appendChild(m);return}
+rs.forEach(p=>{const r=document.createElement('div');r.className='rr';const d=document.createElement('div'),b=document.createElement('b'),sm=document.createElement('small'),bt=document.createElement('button');b.textContent='Phòng của '+nm12(p);sm.textContent=lvTxt(p.presence.hc)+' · mã '+p.presence.hr;bt.textContent='JOIN';bt.onclick=()=>joinRoom(p);d.append(b,sm);r.append(d,bt);box.appendChild(r)})}
+async function createRoom(pre){if(!MM.lobby&&!pre)return;Au.init();const code=pre?'LAN':'r'+Math.random().toString(36).slice(2,7).padEnd(4,'x');
+try{MM.room=pre||await MM.lobby.join(code)}catch(e){MM.msg='Không tạo được phòng, thử lại.';lobbyTick();return}
+const cfg={lv:chain(),md:Store.d.md};Object.assign(MM,{direct:!!pre,role:'host',code,gp:null,cfg,started:false,oppLeft:false,lastGo:0,seenHost:true,msg:''});Store.d.nk=nick();Store.save();
+MM.room.onPeers(mrTick);MM.room.presence({g:'pg',nm:nick(),role:'host',cfg,gp:null,go:0});if(!pre)MM.lobby.presence({nm:nick(),hr:code,hs:'open',hc:cfg});enterRoomView()}
+async function joinRoom(p,pre){const code=pre?'LAN':String(p.presence.hr);Au.init();try{MM.room=pre||await MM.lobby.join(code)}catch(e){MM.msg='Không vào được phòng.';return}
+Object.assign(MM,{direct:!!pre,role:'guest',code,gp:null,cfg:null,started:false,oppLeft:false,lastGo:0,seenHost:false,msg:''});Store.d.nk=nick();Store.save();
+MM.room.onPeers(mrTick);MM.room.presence({g:'pg',nm:nick(),role:'guest',jt:Date.now()});enterRoomView();mq=setTimeout(()=>{if(!MM.seenHost)exitRoom('Không thấy host trong phòng (mạng chưa kết nối được?).')},20000)}
+function enterRoomView(){G.st='ROOM';show('room');$('#ln').hidden=true;$('#jb').hidden=true;$('#rl').hidden=true;$('#rh').hidden=false;$('#rt').textContent=MM.role==='host'?'PHÒNG CỦA BẠN':'ĐÃ VÀO PHÒNG';renderRoom()}
+function renderRoom(){const ps=MM.room?MM.room.peers():[],me=ps.find(p=>p.sameTab),host=ps.find(p=>p.presence.role==='host'),gp=host&&host.presence.gp,guest=gp&&ps.find(p=>p.peer===gp),H=MM.role==='host';
+$('#rc').textContent=MM.code||'';$('#s1').textContent=host?nm12(host):'…';$('#s2').textContent=guest?nm12(guest):'Đang chờ người chơi vào…';$('#rs2').textContent='Cài đặt: '+lvTxt(host&&host.presence.cfg||MM.cfg);
+$('#rgo').style.display=H?'':'none';$('#rgo').disabled=!guest;$('#rwt').textContent=H?(guest?'Đã đủ 2 người. Bấm BẮT ĐẦU TRẬN.':'Đợi người khác vào TÌM PHÒNG → JOIN.'):'Đã vào phòng, chờ host bắt đầu…'}
+function mrTick(ch){if(!MM.room)return;const ps=MM.room.peers(),me=ps.find(p=>p.sameTab),host=ps.find(p=>p.presence.role==='host');
+if(MM.role==='host'){if(!MM.started&&!ps.some(p=>p.peer===MM.gp)){const gs=ps.filter(p=>p.presence.role==='guest').sort((a,b)=>(a.presence.jt-b.presence.jt)||(a.peer<b.peer?-1:1));MM.gp=gs[0]?gs[0].peer:null;MM.room.presence({gp:MM.gp});if(MM.lobby&&!MM.direct)MM.lobby.presence({hs:MM.gp?'full':'open'})}}
+else{if(!host){if(MM.seenHost)exitRoom('Host đã đóng phòng.');return}MM.seenHost=true;if(host.presence.gp&&me&&host.presence.gp!==me.peer){exitRoom('Phòng đã đầy.');return}MM.gp=host.presence.gp||null}
+const oppPeer=MM.role==='host'?MM.gp:host&&host.peer;MM.opp=ps.find(p=>p.peer===oppPeer)||null;
+const go=host?+host.presence.go||0:0,ok=MM.role==='host'?!!MM.gp:!!(host&&me&&host.presence.gp===me.peer);
+if(go>MM.lastGo&&ok&&!MM.started){MM.lastGo=go;MM.started=true;MM.oppLeft=false;clearTimeout(mq);beginDuel(host.presence);return}
+if(MM.started){if(!MM.opp)MM.oppLeft=true;oppUI();checkDuel();return}
+if(G.st==='ROOM')renderRoom()}
+function beginDuel(h){const c=h.cfg||{},lv=(Array.isArray(c.lv)?c.lv:[0]).map(Number).filter(x=>x>=0&&x<6).slice(0,3).sort((a,b)=>a-b);G.cfg={lv:lv.length?lv:[0],md:MD[c.md]?+c.md:1,seed:+h.seed||1};G.mode='duel';$('#nk').blur();startGame();banner('VS '+nm12(MM.opp))}
+function oppUI(){const o=MM.opp&&MM.opp.presence;if(!o)return;const n=x=>+x||0,cl=x=>Math.max(0,Math.min(100,n(x)));$('#on').textContent=String(o.nm||'Đối thủ').slice(0,12);$('#os').textContent=n(o.sc).toLocaleString('en-US');$('#oc').textContent='x'+n(o.cb);$('#og').style.width=cl(o.gg)+'%';$('#or').textContent=n(o.r)+'/'+G.total+' vòng';
+$('#ohz').textContent=String(o.hz||'').slice(0,8);const tn=Math.min(6,n(o.tn)),ti=n(o.ti);$('#ot').innerHTML=Array.from({length:tn},(_,i)=>`<b class="t${i<ti?' ok':''}">${i<ti?'✓':''}</b>`).join('');$('#otb').style.width=cl(o.tl)+'%';
+if(o.jn&&o.jn!==G.ojn){G.ojn=o.jn;const g=['P','C','G','B','M'].includes(o.j)?o.j:'G',e=$('#oj');e.className='j'+g;e.textContent=g==='M'?'MISS':GR[g][0];retrig(e,'go');$('#od').textContent=g==='M'||g==='B'?'😅':'🕺'}}
 function checkDuel(){if(G.mode!=='duel')return;const o=MM.opp&&MM.opp.presence||{},done=MM.oppLeft||o.fin===1;
 if(G.st==='WAIT'&&done){duelResult();return}
 if(['PLAY','COUNT'].includes(G.st)&&(MM.oppLeft||(o.fin===1&&o.ko===1))&&!G.ending){G.ending=1;finishDuel(false)}}
@@ -189,12 +269,20 @@ if(MM.room)MM.room.presence({fin:1,ko:G.ko?1:0,sc:G.score,r:G.round,cb:G.combo,g
 function duelResult(){$('#wt').classList.remove('on');const o=MM.opp&&MM.opp.presence||{},osc=+o.sc||0,oko=o.ko===1,mko=G.ko,left=MM.oppLeft&&o.fin!==1;let r;
 if(left||(oko&&!mko))r='W';else if(mko&&!oko)r='L';else r=G.score>osc?'W':G.score<osc?'L':'D';
 const c=G.cnt,rd=c.P+c.C+c.G+c.B+c.M,xp=Math.floor(G.score/25+rd*3)+(r==='W'?100:0);Store.d.xp+=xp;if(r==='W')Store.d.w++;if(r==='L')Store.d.l++;Store.save();
-const note=left?'Đối thủ đã thoát trận':oko&&!mko?'Đối thủ bị KO (Groove về 0)':mko?'Bạn bị KO (Groove về 0)':'';const nm=String(o.nm||'Đối thủ').slice(0,12);
+const note=left?'Đối thủ đã thoát phòng':oko&&!mko?'Đối thủ bị KO (Groove về 0)':mko?'Bạn bị KO (Groove về 0)':'';const nm=String(o.nm||'Đối thủ').slice(0,12);
 $('#result').innerHTML=`<div class="card"><h2 style="letter-spacing:.2em">1 VS 1</h2><div class="rank ${r==='W'?'rS':r==='L'?'rD':'rB'}" style="font-size:clamp(48px,14vw,86px)">${r==='W'?'VICTORY':r==='L'?'DEFEAT':'DRAW'}</div><div class="mut">${note}</div>
 <div class="rw" style="animation-delay:.3s"><span>Bạn</span><b>${G.score.toLocaleString('en-US')}</b></div><div class="rw" style="animation-delay:.5s"><span id="on2"></span><b>${osc.toLocaleString('en-US')}</b></div>
 <div class="rw" style="animation-delay:.7s"><span>Perfect / Cool</span><b>${c.P} / ${c.C}</b></div><div class="rw" style="animation-delay:.9s"><span>Max combo</span><b>x${G.max}</b></div>
-<div style="color:var(--cy);font-weight:800;margin-top:6px">+${xp} XP · thắng ${Store.d.w} / thua ${Store.d.l}</div><button class="btn" data-a="again">TÌM TRẬN KHÁC</button><button data-a="quit">MENU</button></div>`;$('#on2').textContent=nm;show('result');G.st='RESULT';
-if(MM.room){try{MM.room.leave()}catch(e){}MM.room=null}}
-$('#fm').onclick=mmFind;mmInit();
+<div style="color:var(--cy);font-weight:800;margin-top:6px">+${xp} XP · thắng ${Store.d.w} / thua ${Store.d.l}</div>${left?'':'<button class="btn" data-a="rematch">VỀ PHÒNG · ĐẤU LẠI</button>'}<button data-a="quit">THOÁT PHÒNG</button></div>`;$('#on2').textContent=nm;show('result');G.st='RESULT'}
+function backToRoom(){if(!MM.room){toStart();return}MM.started=false;MM.oppLeft=false;G.ending=0;MM.room.presence({fin:0,ko:0,sc:0,r:0,cb:0,gg:60,hz:null,ti:0,tn:0,tl:100,j:null});enterRoomView();mrTick()}
+function leaveRoom(){clearTimeout(mq);if(MM.room){try{MM.room.leave()}catch(e){}}if(MM.lobby&&!MM.direct&&MM.role==='host')MM.lobby.presence({hr:null,hs:null,hc:null});LAN.reset();Object.assign(MM,{direct:false,room:null,role:null,gp:null,opp:null,started:false,oppLeft:false,lastGo:0});G.mode='solo';document.body.classList.remove('duel');$('#pause h2').textContent='PAUSED'}
+function exitRoom(m){leaveRoom();MM.msg=m||'';toStart();lobbyTick()}
+$('#mkr').onclick=createRoom;$('#fdr').onclick=openBrowse;$('#rgo').onclick=()=>{if(MM.role!=='host'||!MM.gp)return;MM.room.presence({go:MM.lastGo+1,seed:Date.now()%1000000000,cfg:MM.cfg})};
+$('#rb').onclick=()=>exitRoom('');$('#lan').onclick=openLan;$('#lnh').onclick=()=>lanStart('h');$('#lnj').onclick=()=>lanStart('g');$('#lna').onclick=lanAction;
+$('#lnc').onclick=()=>{const t=$('#lno');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){try{document.execCommand('copy')}catch(x){}}lanMsg('Đã copy mã. Dán vào Zalo/Messenger rồi gửi cho người kia.')};
+const joinByCode=()=>{const c=$('#jc').value.trim().toLowerCase();if(!CODE_RE.test(c)){$('#jc').focus();return}if(!MM.lobby||MM.room)return;$('#jc').value='';joinRoom({presence:{hr:c}})};
+$('#jgo').onclick=joinByCode;$('#jc').onkeydown=e=>{if(e.key==='Enter')joinByCode()};
+$('#rc').title='Bấm để copy mã phòng';$('#rc').onclick=()=>{try{navigator.clipboard.writeText(MM.code||'');$('#rwt').textContent='Đã copy mã phòng: '+MM.code}catch(e){}};
+mmInit();
 renderStart();
 </script></body></html>
